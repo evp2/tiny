@@ -3,6 +3,13 @@
 * \brief tinylex.c performs lexical analysis
 * \author Mantis, Pomponio, Scuderi, Smith
 */
+
+/*TODO:
+*
+*Save the tokens as an array of Stack Structs
+*
+*/
+
 /* ******************************************************************** */
 /* tinylex.c performs lexical analysis                                  */
 /* ******************************************************************** */

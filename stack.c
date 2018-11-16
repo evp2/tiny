@@ -1,3 +1,9 @@
+/**
+* \file stack.c
+* \brief stack.c provides struct for a stack and the following functions
+* \author Mantis, Pomponio, Scuderi, Smith
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -16,6 +22,11 @@ float pop(void);
 float top(void);
 
 /* ********************************** */
+/** \brief Main application entry point.
+*
+* \param nothing
+* \returns nothing
+*/
 main(){
    float op1, op2;
    char  expr[256];
@@ -54,7 +65,15 @@ main(){
          op2=pop();
          push(op2/op1);
       }
-      
+      else if (*nextPtr == '=') { // if token is assignment
+         op1=pop();
+         op2=pop();
+         op1=op2;
+         push(op2);
+      }
+    /*TODO:multi-character character constants  ==, !=, &&, ||
+     *#define EQU_OP in tinylex? 
+     */
       nextPtr = strtok(NULL," ");
    }
 
@@ -67,27 +86,53 @@ main(){
 }
    
 /* ********************************** */
+
+/** \brief calloc memory for stack.
+*
+* \param args nothing
+* \returns nothing
+*/
 void initStack(){
    stk.elements = calloc(MAX_STK_SIZE, sizeof(float));
    stk.ptr = 0;
 }
 
 /* ********************************** */
+/** \brief pushes an item onto the top of the stack 
+*
+* \param args item to be pushed
+* \returns nothing
+*/
 void push(float x){
    stk.elements[stk.ptr++] = x;
 }
 
 /* ********************************** */
+ /** \brief returns the item at the top of the stack and removes it.
+*
+* \param args nothing
+* \returns returns the item at the top of the stack
+*/
 float pop(){
    return stk.elements[--stk.ptr];
 }
 
 /* ********************************** */
+ /** \brief shows the item at the top of the stack.
+*
+* \param args nothing
+* \returns returns the item at the top of the stack
+*/
 float top(){
    return stk.elements[stk.ptr-1];
 }
 
 /* ********************************** */
+ /** \brief free memory for stack.
+*
+* \param args nothing
+* \returns nothing
+*/
 void freeStack(){
    free(stk.elements);
 }
